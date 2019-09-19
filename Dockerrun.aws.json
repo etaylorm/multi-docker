@@ -1,0 +1,35 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "etaylorm/multi-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "etaylorm/multi-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "etaylorm/multi-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "etaylorm/multi-nginx",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 80,
+					"containerPort" : 80
+				}
+			],
+			"links": ["client", "server"]
+		}
+	]
+}
